@@ -21,7 +21,7 @@ const Cart = () => {
     }
 
     try {
-      const response = await axios.post('https://heroku-server-gamma.vercel.app/order/placeOrder', {
+      const response = await axios.post('https://server-h3fu.onrender.com/order/placeOrder', {
         products: cart.map(item => ({ productId: item.product._id, quantity: item.quantity })),
       }, {
         headers: {

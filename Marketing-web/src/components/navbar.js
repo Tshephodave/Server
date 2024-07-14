@@ -9,7 +9,7 @@ const Navbar = ({ user, setUser }) => {
 
   const logout = async () => {
     try {
-      await axios.post('https://heroku-server-gamma.vercel.app/user/logout');
+      await axios.post('https://server-h3fu.onrender.com/user/logout');
       localStorage.removeItem('token');
       setUser(null);
       navigate('/login');

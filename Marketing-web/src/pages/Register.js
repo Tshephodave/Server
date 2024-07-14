@@ -29,7 +29,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://heroku-server-gamma.vercel.app/user/register', formData);
+      const response = await axios.post('https://server-h3fu.onrender.com/user/register', formData);
       alert(response.data.message);
       navigate('/login');
     } catch (error) {

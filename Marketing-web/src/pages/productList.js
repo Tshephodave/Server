@@ -25,7 +25,7 @@ const ProductList = () => {
     const fetchProducts = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get("https://heroku-server-gamma.vercel.app/product/getProducts", {
+        const response = await axios.get("https://server-h3fu.onrender.com/product/getProducts", {
           headers: {
             'Authorization': token
           }
@@ -43,7 +43,7 @@ const ProductList = () => {
       if (token) {
         try {
           const { userId } = jwtDecode(token);
-          const response = await axios.get(`https://heroku-server-gamma.vercel.app/user/${userId}`, {
+          const response = await axios.get(`https://server-h3fu.onrender.com/user/${userId}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -68,7 +68,7 @@ const ProductList = () => {
   const handleDelete = async (productId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`https://heroku-server-gamma.vercel.app/product/deleteProduct/${productId}`, {
+      await axios.delete(`https://server-h3fu.onrender.com/product/deleteProduct/${productId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -87,7 +87,7 @@ const ProductList = () => {
     event.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`https://heroku-server-gamma.vercel.app/product/updateProduct/${selectedProduct._id}`, updatedProduct, {
+      await axios.put(`https://server-h3fu.onrender.com/product/updateProduct/${selectedProduct._id}`, updatedProduct, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

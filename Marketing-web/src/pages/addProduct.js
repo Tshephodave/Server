@@ -21,7 +21,7 @@ function AddProduct() {
     e.preventDefault();
     try{
       const token = localStorage.getItem('token');
-      const response = await axios.post('https://heroku-server-gamma.vercel.app/product/addproduct', formData,{
+      const response = await axios.post('https://server-h3fu.onrender.com/product/addproduct', formData,{
         headers: {
           'Authorization': token
         }

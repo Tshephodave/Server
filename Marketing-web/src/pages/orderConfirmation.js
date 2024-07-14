@@ -10,7 +10,7 @@ const OrderConfirmation = () => {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get("https://heroku-server-gamma.vercel.app/order/confirmation", {
+        const response = await axios.get("https://server-h3fu.onrender.com/order/confirmation", {
           headers: {
             'Authorization': `Bearer ${token}`
           }
