@@ -25,12 +25,12 @@ const Login = ({ setUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://heroku-server-gamma.vercel.app/user/login', formData);
+      const response = await axios.post('https://server-h3fu.onrender.com/user/login', formData);
       const token = response.data.token;
       localStorage.setItem('token', token);
 
       const { userId } = jwtDecode(token);
-      const userResponse = await axios.get(`https://heroku-server-gamma.vercel.app/user/${userId}`, {
+      const userResponse = await axios.get(`https://server-h3fu.onrender.com/user/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
