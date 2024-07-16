@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -38,17 +39,17 @@ const OrderConfirmation = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {orders.map(order => (
             <div key={order._id} className="bg-white p-4 rounded-lg shadow-md">
-              <h2 className="text-xl font-semibold mb-4">Order ID: {order._id}</h2>
-              <p className="text-gray-600"><strong>Status:</strong> {order.status}</p>
-              <p className="text-gray-600"><strong>Total Price:</strong> R{order.totalPrice}</p>
+              <p className="text-gray-600"><strong>Total Price:</strong> R{order.totalPrice.toFixed(2)}</p>
               <h3 className="text-lg font-bold mt-4">Products:</h3>
               <ul>
                 {order.products.map(product => (
-                  <li key={product.product} className="mb-2">
-                    <p className="text-gray-600"><strong>Item Code:</strong> {product.itemCode}</p>
-                    <p className="text-gray-600"><strong>Name:</strong> {product.name}</p>
-                    <p className="text-gray-600"><strong>Quantity:</strong> {product.quantity}</p>
-                    <p className="text-gray-600"><strong>Price:</strong> R{product.price}</p>
+                  <li key={product.product} className="mb-4 flex items-center">
+                    <img src={product.picture} alt={product.name} className="w-16 h-16 object-cover rounded-md mr-4" />
+                    <div>
+                      <p className="text-gray-600"><strong>Item Code:</strong> {product.itemCode}</p>
+                      <p className="text-gray-600"><strong>Quantity:</strong> {product.quantity}</p>
+                      <p className="text-gray-600"><strong>Price:</strong> R{product.price.toFixed(2)}</p>
+                    </div>
                   </li>
                 ))}
               </ul>
