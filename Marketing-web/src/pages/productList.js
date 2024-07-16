@@ -136,7 +136,7 @@ const ProductList = () => {
             )}
             {userRole === 'admin' && (
               <>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" onClick={() => openModal(product)}>Update</button>
+                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2" onClick={() => openModal(product)}>Update</button>
                 <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleDelete(product._id)}>Delete</button>
               </>
             )}
@@ -152,7 +152,7 @@ const ProductList = () => {
         overlayClassName="fixed inset-0 bg-black bg-opacity-50"
       >
         <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-auto">
-          <h2 className="text-2xl mb-4">Update Product</h2>
+          <h2 className="text-4xl font-bold mb-6 text-center text-green-600-2xl mb-4">Update Product</h2>
           <form onSubmit={handleUpdate}>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="itemCode">Item Code</label>
@@ -206,13 +206,13 @@ const ProductList = () => {
             <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
                 Update
               </button>
               <button
                 type="button"
-                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 onClick={closeModal}
               >
                 Cancel
