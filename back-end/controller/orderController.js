@@ -29,7 +29,7 @@ async function placeOrder(req, res) {
       }
       const price = product.price * quantity;
       totalPrice += price;
-      return { product: productId, name: product.name, quantity, price, itemCode:product.itemCode};
+      return { product: productId, name: product.name, quantity, price, itemCode:product.itemCode,picture:product.picture};
     }));
 
     const newOrder = new Order({
