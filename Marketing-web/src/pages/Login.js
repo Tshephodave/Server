@@ -11,7 +11,6 @@ library.add(faEnvelope, faLock);
 const Login = ({ setUser }) => {
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
   });
   const navigate = useNavigate();
 
@@ -61,20 +60,8 @@ const Login = ({ setUser }) => {
               required
             />
           </div>
-          <div>
-            <div className="flex items-center space-x-2">
-              <FontAwesomeIcon icon="lock" className="text-gray-500" />
-              <label className="block text-gray-700">Password</label>
-            </div>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded mt-1"
-              required
-            />
-          </div>
+          
+            
           <button type="submit" className="w-full bg-green-600 text-white p-3 rounded-md font-semibold hover:bg-green-700 transition duration-200">
             Login
           </button>
