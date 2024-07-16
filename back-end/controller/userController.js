@@ -1,27 +1,20 @@
 const User = require('../model/User');
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
 async function register(req, res) {
   try {
-    const { username, email, phone, password, passwordConfirm, address, role } = req.body;
-
-    if (password !== passwordConfirm) {
-      return res.status(400).json({ message: "Passwords do not match" });
-    }
+    const { username, email,agent, phone, address, role } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
-    const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
       username,
       email,
+      agent,
       phone,
-      password: hashedPassword,
-      passwordConfirm,
       address,
       role,
     });
@@ -48,7 +41,6 @@ async function register(req, res) {
           <p>Dear ${newUser.username},</p>
           <p>Thank you for registering with us. Below are your login details:</p>
           <p><strong>Email:</strong> ${newUser.email}</p>
-          <p><strong>Password:</strong> ${passwordConfirm}</p>
           <p>To access your account, please log in using your email and password.</p>
           <p>If you have any questions, feel free to contact our support team.</p>
         </div>
@@ -71,17 +63,11 @@ async function register(req, res) {
 
 async function login(req, res) {
   try {
-    const { email, password } = req.body;
+    const { email} = req.body;
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid password" });
-    }
-
     const token = jwt.sign({ userId: user._id, role: user.role }, 'order_web_2024');
     res.status(200).json({ token });
   } catch (error) {
@@ -112,5 +98,4 @@ async function logout(req, res) {
 
 
 module.exports = { register, login,logout, getUser };
-
 
