@@ -33,17 +33,19 @@ async function register(req, res) {
       to: newUser.email,
       subject: 'Registration Successful',
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
-          <div style="text-align: center;">
-            <img src="https://vivlia.co.za/wp-content/uploads/2023/07/Vivlia-Logo.png" alt="Logo" style="max-width: 100px; margin-bottom: 20px;" />
-          </div>
-          <h2 style="text-align: center; text-color: green">Welcome to Vivlia Online Store, ${newUser.username}!</h2>
-          <p>Dear ${newUser.username},</p>
-          <p>Thank you for registering with us. Below are your login details:</p>
-          <p><strong>Email:</strong> ${newUser.email}</p>
-          <p>To access your account, please log in using your email.</p>
-          <p>If you have any questions, feel free to contact our support team.</p>
-        </div>
+       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
+  <div style="text-align: center;">
+    <img src="https://vivlia.co.za/wp-content/uploads/2023/07/Vivlia-Logo.png" alt="Logo" style="max-width: 100px; margin-bottom: 20px;" />
+  </div>
+  <h2 style="text-align: center; color: #28a745;">Welcome to Vivlia Online Store, ${newUser.username}!</h2>
+  <p>Dear ${newUser.username},</p>
+  <p>Thank you for registering with us. Below are your login details:</p>
+  <p><strong>Email:</strong> ${newUser.email}</p>
+  <p>To access your account, please log in using your email and password.</p>
+  <p>If you have any questions, feel free to contact our support team.</p>
+  <p>Best regards,</p>
+  <p><strong>Vivlia Online Store Team</strong></p>
+</div>
       `,
     };
 
