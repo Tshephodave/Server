@@ -47,6 +47,7 @@ const OrderConfirmation = () => {
                     <img src={product.picture} alt={product.name} className="w-16 h-16 object-cover rounded-md mr-4" />
                     <div>
                       <p className="text-gray-600"><strong>Item Code:</strong> {product.itemCode}</p>
+                     <p className="text-gray-600"><strong>Name:</strong> {product.name}</p>
                       <p className="text-gray-600"><strong>Quantity:</strong> {product.quantity}</p>
                       <p className="text-gray-600"><strong>Price:</strong> R{product.price.toFixed(2)}</p>
                     </div>
