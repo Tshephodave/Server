@@ -148,7 +148,7 @@ const ProductList = () => {
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         contentLabel="Update Product"
-        className="fixed inset-0 flex items-center justify-center z-50"
+        className="fixed inset-0 flex items-start justify-center mt-16 z-50"
         overlayClassName="fixed inset-0 bg-black bg-opacity-50"
       >
         <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-auto">
