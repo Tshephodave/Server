@@ -1,31 +1,67 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope, faPhone, faMapMarkerAlt,faPerson, faCheck, faUserTag } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faEnvelope, faPhone, faMapMarkerAlt, faPerson, faCheck, faUserTag } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {useNavigate} from 'react-router-dom'
-library.add(faUser, faEnvelope, faPhone, faMapMarkerAlt, faPerson,faCheck, faUserTag);
+import { useNavigate } from 'react-router-dom';
+
+library.add(faUser, faEnvelope, faPhone, faMapMarkerAlt, faPerson, faCheck, faUserTag);
 
 const Register = () => {
-  const navigate= useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     phone: '',
     agent: '',
     address: '',
-    role: 'customer' 
+    role: 'customer'
   });
 
+  const [errors, setErrors] = useState({
+    email: '',
+    phone: ''
+  });
+
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  const validatePhone = (phone) => {
+    const regex =  /\d{3}-\d{3}-\d{4}/; 
+    return regex.test(phone);
+  };
+
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === 'email') {
+      setErrors({
+        ...errors,
+        email: validateEmail(value) ? '' : 'Invalid email format-must be in this format usr@gmail.com'
+      });
+    }
+
+    if (name === 'phone') {
+      setErrors({
+        ...errors,
+        phone: validatePhone(value) ? '' : 'Invalid phone format-must be in this format 071-343-0009'
+      });
+    }
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (errors.email || errors.phone) {
+      alert('Please fix the errors in the form');
+      return;
+    }
     try {
       const response = await axios.post('https://server-h3fu.onrender.com/user/register', formData);
       alert(response.data.message);
@@ -67,14 +103,15 @@ const Register = () => {
               className="w-full p-3 border border-gray-300 rounded mt-1"
               required
             />
+            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
           </div>
           <div>
-          <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2">
               <FontAwesomeIcon icon="person" className="text-gray-500" />
               <label className="block text-gray-700">Agent</label>
             </div>
             <input
-              type="agent"
+              type="text"
               name="agent"
               value={formData.agent}
               onChange={handleChange}
@@ -95,6 +132,7 @@ const Register = () => {
               className="w-full p-3 border border-gray-300 rounded mt-1"
               required
             />
+            {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
           </div>
           <div>
             <div className="flex items-center space-x-2">
@@ -104,7 +142,7 @@ const Register = () => {
             <input
               type="text"
               name="address"
-              value={formData.location}
+              value={formData.address}
               onChange={handleChange}
               className="w-full p-3 border border-gray-300 rounded mt-1"
               required
@@ -129,7 +167,6 @@ const Register = () => {
             Register
           </button>
         </form>
-        
       </div>
     </div>
   );
