@@ -33,7 +33,7 @@ async function register(req, res) {
       to: newUser.email,
       subject: 'Registration Successful',
       html: `
-       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
   <div style="text-align: center;">
     <img src="https://vivlia.co.za/wp-content/uploads/2023/07/Vivlia-Logo.png" alt="Logo" style="max-width: 100px; margin-bottom: 20px;" />
   </div>
@@ -46,6 +46,7 @@ async function register(req, res) {
   <p>Best regards,</p>
   <p><strong>Vivlia Online Store Team</strong></p>
 </div>
+
       `,
     };
 
