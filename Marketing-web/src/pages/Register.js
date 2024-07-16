@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope, faPhone, faMapMarkerAlt, faLock, faCheck, faUserTag } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faEnvelope, faPhone, faMapMarkerAlt,faPerson, faCheck, faUserTag } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {useNavigate} from 'react-router-dom'
-
-library.add(faUser, faEnvelope, faPhone, faMapMarkerAlt, faLock, faCheck, faUserTag);
+library.add(faUser, faEnvelope, faPhone, faMapMarkerAlt, faPerson,faCheck, faUserTag);
 
 const Register = () => {
   const navigate= useNavigate();
@@ -13,8 +12,7 @@ const Register = () => {
     username: '',
     email: '',
     phone: '',
-    password: '',
-    passwordConfirm: '',
+    agent: '',
     address: '',
     role: 'customer' 
   });
@@ -71,6 +69,20 @@ const Register = () => {
             />
           </div>
           <div>
+          <div className="flex items-center space-x-2">
+              <FontAwesomeIcon icon="person" className="text-gray-500" />
+              <label className="block text-gray-700">Agent</label>
+            </div>
+            <input
+              type="agent"
+              name="agent"
+              value={formData.agent}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded mt-1"
+              required
+            />
+          </div>
+          <div>
             <div className="flex items-center space-x-2">
               <FontAwesomeIcon icon="phone" className="text-gray-500" />
               <label className="block text-gray-700">Phone</label>
@@ -100,34 +112,6 @@ const Register = () => {
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <FontAwesomeIcon icon="lock" className="text-gray-500" />
-              <label className="block text-gray-700">Password</label>
-            </div>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded mt-1"
-              required
-            />
-          </div>
-          <div>
-            <div className="flex items-center space-x-2">
-              <FontAwesomeIcon icon="check" className="text-gray-500" />
-              <label className="block text-gray-700">Confirm Password</label>
-            </div>
-            <input
-              type="password"
-              name="passwordConfirm"
-              value={formData.passwordConfirm}
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded mt-1"
-              required
-            />
-          </div>
-          <div>
-            <div className="flex items-center space-x-2">
               <FontAwesomeIcon icon="user-tag" className="text-gray-500" />
               <label className="block text-gray-700">Role</label>
             </div>
@@ -139,7 +123,6 @@ const Register = () => {
               required
             >
               <option value="customer">Customer</option>
-              <option value="admin">Admin</option>
             </select>
           </div>
           <button type="submit" className="w-full bg-green-600 text-white p-3 rounded-md font-semibold hover:bg-green-700 transition duration-200">
