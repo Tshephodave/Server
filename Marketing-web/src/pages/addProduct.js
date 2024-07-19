@@ -5,7 +5,6 @@ function AddProduct() {
   const [formData, setFormData] = useState({
     itemCode: '',
     name: '',
-    description: '',
     price: '',
     picture: '',
   });
@@ -30,7 +29,6 @@ function AddProduct() {
       setFormData({
         itemCode: '',
         name: '',
-        description: '',
         price: '',
         picture: '',
       });
@@ -65,17 +63,6 @@ function AddProduct() {
             id="name"
             name="name"
             value={formData.name}
-            onChange={handleChange}
-            className="border p-2 rounded w-full"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="description" className="block text-gray-700">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
             onChange={handleChange}
             className="border p-2 rounded w-full"
             required
