@@ -11,7 +11,7 @@ const getProducts = async (req, res) => {
 
 const addProduct = async (req, res) => {
   try {
-    const { itemCode, name, description, picture, price } = req.body;
+    const { itemCode, name, picture, price } = req.body;
     const newProduct = new Product({ itemCode, name, picture, price, user: req.user.userId });
     await newProduct.save();
     res.status(201).json({ message: 'Product added successfully', product: newProduct });
