@@ -16,7 +16,6 @@ const ProductList = () => {
   const [updatedProduct, setUpdatedProduct] = useState({
     itemCode: '',
     name: '',
-    description: '',
     price: '',
     picture: ''
   });
@@ -130,7 +129,6 @@ const ProductList = () => {
             <img src={product.picture} alt={product.name} className="h-64 w-full object-cover mb-4 rounded-t-lg" />
             <p className="text-gray-600"><strong>ItemCode:</strong> {product.itemCode}</p>
             <h2 className="text-xl font-semibold">{product.name}</h2>
-            <p className="text-gray-600">{product.description}</p>
             <p className="text-lg font-bold mt-2">R{product.price}</p>
             {userRole === 'customer' && (
               <button className="bg-green-500 hover:bg-dark-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleAddToCart(product)}>Add to Cart</button>
@@ -172,15 +170,6 @@ const ProductList = () => {
                 id="name"
                 value={updatedProduct.name}
                 onChange={(e) => setUpdatedProduct({ ...updatedProduct, name: e.target.value })}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">Description</label>
-              <textarea
-                id="description"
-                value={updatedProduct.description}
-                onChange={(e) => setUpdatedProduct({ ...updatedProduct, description: e.target.value })}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
