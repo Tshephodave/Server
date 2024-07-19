@@ -41,7 +41,7 @@ async function register(req, res) {
   <p>Dear ${newUser.username},</p>
   <p>Thank you for registering with us. Below are your login details:</p>
   <p><strong>Email:</strong> ${newUser.email}</p>
-  <p>To access your account, please log in using your email and password.</p>
+  <p>To access your account, please log in using your email</p>
   <p>If you have any questions, feel free to contact our support team.</p>
   <p>Best regards,</p>
   <p><strong>Vivlia Online Store Team</strong></p>
