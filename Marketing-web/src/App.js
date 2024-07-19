@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import Navbar from './components/navbar';
 import Register from './pages/Register';
 import Login from './pages/Login';
@@ -12,8 +12,7 @@ import Cart from './pages/cart';
 import AddProduct from './pages/addProduct';
 import Confirmation from './pages/orderConfirmation';
 import { CartProvider } from './context/cartContext';
-
-
+import PrivateRoute from './components/PrivateRoute';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -49,10 +48,10 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login setUser={setUser} />} />
-              <Route path="/stock" element={<Stock />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/oderdetails" element= {<Confirmation/>}/>
-              <Route path="/add-product" element={<AddProduct />} />
+              <Route path="/stock" element={<PrivateRoute element={Stock} user={user} />} />
+              <Route path="/cart" element={<PrivateRoute element={Cart} user={user} />} />
+              <Route path="/orderdetails" element={<PrivateRoute element={Confirmation} user={user} />} />
+              <Route path="/add-product" element={<PrivateRoute element={AddProduct} user={user} />} />
             </Routes>
           </main>
           <Footer />
