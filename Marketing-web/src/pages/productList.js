@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { CartContext } from '../context/cartContext';
 import { jwtDecode } from 'jwt-decode';
+import Loading from './components/Loading'; 
+
 import Modal from 'react-modal';
 
 const ProductList = () => {
@@ -112,7 +114,7 @@ const ProductList = () => {
     setIsModalOpen(false);
   };
 
-  if (loading) return <div className="text-center">Loading...</div>;
+  if (loading) return <Loading/>;
 
   if (error) return <div className="text-center text-red-500">{error}</div>;
 
