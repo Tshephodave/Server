@@ -13,6 +13,8 @@ import AddProduct from './pages/addProduct';
 import Confirmation from './pages/orderConfirmation';
 import { CartProvider } from './context/cartContext';
 import ProtectedRoute from './components/PrivateRoute';
+import Loading from './components/Loading'; 
+
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -41,7 +43,7 @@ const App = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; 
+    return <Loading/>; 
   }
 
   return (
