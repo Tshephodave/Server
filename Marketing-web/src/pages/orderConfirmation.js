@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Loading from './components/Loading'; 
 
 const OrderConfirmation = () => {
   const [orders, setOrders] = useState([]);
@@ -27,7 +28,7 @@ const OrderConfirmation = () => {
     fetchOrders();
   }, []);
 
-  if (loading) return <div className="text-center">Loading...</div>;
+  if (loading) return <Loading/>;
   if (error) return <div className="text-center text-red-500">{error}</div>;
 
   return (
