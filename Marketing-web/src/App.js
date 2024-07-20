@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 import Navbar from './components/navbar';
@@ -12,6 +12,7 @@ import Cart from './pages/cart';
 import AddProduct from './pages/addProduct';
 import Confirmation from './pages/orderConfirmation';
 import { CartProvider } from './context/cartContext';
+import ProtectedRoute from './components/PrivateRoute';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -23,7 +24,7 @@ const App = () => {
       if (token) {
         try {
           const { userId } = jwtDecode(token);
-          const response = await axios.get(`https://server-h3fu.onrender.com/user/${userId}`, {
+          const response = await axios.get(`https://server-h3fu.onrender.co/user/${userId}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -39,6 +40,10 @@ const App = () => {
     fetchUserData();
   }, []);
 
+  if (loading) {
+    return <div>Loading...</div>; 
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <CartProvider>
@@ -49,10 +54,38 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login setUser={setUser} />} />
-              <Route path="/stock" element={<Stock />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/oderdetails" element={<Confirmation />} />
-              <Route path="/add-product" element={<AddProduct />} />
+              <Route
+                path="/stock"
+                element={
+                  <ProtectedRoute user={user}>
+                    <Stock />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/cart"
+                element={
+                  <ProtectedRoute user={user}>
+                    <Cart />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/oderdetails"
+                element={
+                  <ProtectedRoute user={user}>
+                    <Confirmation />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/add-product"
+                element={
+                  <ProtectedRoute user={user}>
+                    <AddProduct />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           </main>
           <Footer />
