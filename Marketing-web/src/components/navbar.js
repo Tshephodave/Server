@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Navbar = ({ user, setUser }) => {
+const Navbar = ({ user, setUser, loading }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpaque, setIsOpaque] = useState(true);
   const navigate = useNavigate();
@@ -55,7 +55,9 @@ const Navbar = ({ user, setUser }) => {
           </svg>
         </button>
         <div className={`flex flex-col md:flex-row md:items-center ${isOpen ? 'block' : 'hidden'} md:block`}>
-          {!user ? (
+          {loading ? (
+            <p className="text-white text-lg px-3 py-2">Loading...</p>
+          ) : !user ? (
             <>
               <Link to="/register" className="text-white text-lg hover:text-gray-200 transition duration-200 ease-in-out px-3 py-2">
                 Register
