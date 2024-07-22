@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { CartContext } from '../context/cartContext';
-import { jwtDecode } from 'jwt-decode';
-import Loading from '../components/Loading'; 
-
+import {jwtDecode} from 'jwt-decode';
+import Loading from '../components/Loading';
 import Modal from 'react-modal';
 
 const ProductList = () => {
@@ -21,6 +20,9 @@ const ProductList = () => {
     price: '',
     picture: ''
   });
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 6;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -114,7 +116,15 @@ const ProductList = () => {
     setIsModalOpen(false);
   };
 
-  if (loading) return <Loading/>;
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const totalPages = Math.ceil(products.length / productsPerPage);
+
+  if (loading) return <Loading />;
 
   if (error) return <div className="text-center text-red-500">{error}</div>;
 
@@ -126,7 +136,7 @@ const ProductList = () => {
         <p>{message}</p>
       </div>}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {products.map(product => (
+        {currentProducts.map(product => (
           <div key={product._id} className="bg-white p-4 rounded-lg shadow-md">
             <img src={product.picture} alt={product.name} className="h-64 w-full object-cover mb-4 rounded-t-lg" />
             <p className="text-gray-600"><strong>ItemCode:</strong> {product.itemCode}</p>
@@ -145,6 +155,27 @@ const ProductList = () => {
         ))}
       </div>
 
+      <div className="flex justify-center mt-6 space-x-4">
+        <button
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+          className={`w-32 ${
+            currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-700'
+          } text-white font-bold py-2 px-4 rounded`}
+        >
+          Previous
+        </button>
+        <button
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className={`w-32 ${
+            currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-700'
+          } text-white font-bold py-2 px-4 rounded`}
+        >
+          Next
+        </button>
+      </div>
+
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
@@ -153,7 +184,7 @@ const ProductList = () => {
         overlayClassName="fixed inset-0 bg-black bg-opacity-50"
       >
         <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-auto">
-          <h2 className="text-4xl font-bold mb-6 text-center text-green-600-2xl mb-4">Update Product</h2>
+          <h2 className="text-2xl mb-4">Update Product</h2>
           <form onSubmit={handleUpdate}>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="itemCode">Item Code</label>
