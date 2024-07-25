@@ -46,7 +46,7 @@ const Cart = () => {
       <div className="divide-y divide-gray-200">
         {cart.map(item => (
           <div key={item.product._id} className="py-4 flex items-center space-x-4 bg-white shadow-md rounded-lg p-4 mb-4">
-            <img src={item.product.picture} alt={item.product.name} className="w-20 h-20 object-cover rounded-md" />
+            <img src={item.product.picture} alt={item.product.name} className="w-20 h-20 object-fit rounded-md" />
             <div className="flex-1">
               <div className="text-xl text-green-600 font-semibold">{item.product.name}</div>
               <div className="text-green-600">Quantity: {item.quantity} | Price: R{item.product.price * item.quantity}</div>
