@@ -86,6 +86,23 @@ const ProductList = () => {
     }
   };
 
+  const handleSearch = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`https://server-h3fu.onrender.com/product/searchProducts`, {
+        headers: {
+          'Authorization': token
+        },
+        params: { name: searchTerm }
+      });
+      setProducts(response.data.products);
+    } catch (error) {
+      setError('Error searching for products');
+    } finally {
+      setLoading(false);
+    }
+  };
   const handleUpdate = async (event) => {
     event.preventDefault();
     try {
@@ -135,6 +152,21 @@ const ProductList = () => {
         <p className="font-bold">{message.includes('Error') ? 'Error' : 'Success'}</p>
         <p>{message}</p>
       </div>}
+  <div className="flex justify-center mb-4">
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search by name"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+        <button
+          onClick={handleSearch}
+          className="ml-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Search
+        </button>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {currentProducts.map(product => (
           <div key={product._id} className="bg-white p-4 rounded-lg shadow-md">
