@@ -138,7 +138,7 @@ const ProductList = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {currentProducts.map(product => (
           <div key={product._id} className="bg-white p-4 rounded-lg shadow-md">
-            <img src={product.picture} alt={product.name} className="h-64 w-full object-cover mb-4 rounded-t-lg" />
+            <img src={product.picture} alt={product.name} className="h-64 w-full object-fit mb-4 rounded-t-lg" />
             <p className="text-gray-600"><strong>ItemCode:</strong> {product.itemCode}</p>
             <h2 className="text-xl font-semibold">{product.name}</h2>
             <p className="text-lg font-bold mt-2">R{product.price}</p>
