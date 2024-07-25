@@ -44,10 +44,19 @@ const updateProduct = async (req, res) => {
     res.status(500).json({ error: 'Error updating product in the database' });
   }
 };
-
+const searchProducts = async (req, res) => {
+  try {
+    const { name } = req.query;
+    const products = await Product.find({ name: new RegExp(name, 'i') });
+    res.status(200).json({ products });
+  } catch (error) {
+    res.status(500).json({ error: 'Error searching for products in the database' });
+  }
+};
 module.exports = {
   getProducts,
   addProduct,
   deleteProduct,
-  updateProduct
+  updateProduct,
+  searchProducts
 };
