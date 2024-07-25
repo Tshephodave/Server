@@ -23,25 +23,25 @@ const Home = () => {
         className="mb-12"
       >
         <div className="relative h-64 md:h-96">
-          <img className="w-full h-full object-cover" src={design} alt="Design" />
+          <img className="w-full h-full object-fit" src={design} alt="Design" />
           <p className="legend bg-green-800 text-white bg-opacity-75 p-2 rounded">Learning Games</p>
         </div>
         <div className="relative h-64 md:h-96">
-          <img className="w-full h-full object-cover" src={dolls} alt="Dolls" />
+          <img className="w-full h-full object-fit" src={dolls} alt="Dolls" />
           <p className="legend bg-blue-800 text-white bg-opacity-75 p-2 rounded">Playing dolls</p>
         </div>
         <div className="relative h-64 md:h-96">
-          <img className="w-full h-full object-cover" src={ambulance} alt="Ambulance" />
+          <img className="w-full h-full object-fit" src={ambulance} alt="Ambulance" />
           <p className="legend bg-blue-800 text-white bg-opacity-75 p-2 rounded">Ambulance</p>
         </div>
         <div className="relative h-64 md:h-96">
-          <img className="w-full h-full object-cover" src={helicopter} alt="Helicopter" />
+          <img className="w-full h-full object-fit" src={helicopter} alt="Helicopter" />
           <p className="legend bg-blue-800 text-white bg-opacity-75 p-2 rounded">Helicopter </p>
         </div>
       </Carousel>
      
       <section className="relative py-20">
-        <img src={logistics} alt="Logistics" className="absolute inset-0 w-full h-full object-cover" />
+        <img src={logistics} alt="Logistics" className="absolute inset-0 w-full h-full object-fit" />
         <div className="relative bg-gray-900 bg-opacity-50 p-8 rounded-lg text-center text-white max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold mb-6">Our Vision</h2>
           <p className="text-xl mb-6">We understand that our role as an educational publication is passing on knowledge to different generations in a meaningful way.</p>
