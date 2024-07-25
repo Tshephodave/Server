@@ -10,13 +10,11 @@ const order = require('./routes/Order');
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_ATLAS_URI || "mongodb+srv://tshepho:davidrap@cluster0.dwyuahg.mongodb.net/Marketing", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
     });
     console.log('Connected to MongoDB');
   } catch (error) {
     console.error('Error connecting to MongoDB:', error.message);
-    process.exit(1); // Exit process with failure
+    process.exit(1); 
   }
 };
 
