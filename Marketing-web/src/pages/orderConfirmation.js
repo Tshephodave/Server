@@ -45,7 +45,7 @@ const OrderConfirmation = () => {
               <ul>
                 {order.products.map(product => (
                   <li key={product.product} className="mb-4 flex items-center">
-                    <img src={product.picture} alt={product.name} className="w-16 h-16 object-cover rounded-md mr-4" />
+                    <img src={product.picture} alt={product.name} className="w-16 h-16 object-fit rounded-md mr-4" />
                     <div>
                       <p className="text-gray-600"><strong>Item Code:</strong> {product.itemCode}</p>
                      <p className="text-gray-600"><strong>Name:</strong> {product.name}</p>
