@@ -10,6 +10,7 @@ const ProductList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const { addToCart } = useContext(CartContext);
   const [userRole, setUserRole] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
