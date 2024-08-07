@@ -46,13 +46,13 @@ async function placeOrder(req, res) {
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: 'www.tshepodavid@gmail.com',
-        pass: 'kjvl nttf knhr zrqy',
+        user: 'cleverkidzcc@gmail.com',
+        pass: 'hxva pprd rxyi juyx',
       },
     });
 
     const mailOptions = {
-      from: 'www.tshepodavid@gmail.com',
+      from: 'onlinestore@srty.com',
       to: 'tshepodavid365@gmail.com', 
       subject: 'New Order Placed',
       html: `
