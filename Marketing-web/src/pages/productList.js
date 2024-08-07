@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { CartContext } from '../context/cartContext';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import Loading from '../components/Loading';
 import Modal from 'react-modal';
 
@@ -21,9 +21,9 @@ const ProductList = () => {
     price: '',
     picture: ''
   });
+
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 6;
-  const [noProductsFound, setNoProductsFound] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -97,20 +97,13 @@ const ProductList = () => {
         },
         params: { name: searchTerm }
       });
-
-      if (response.data.products.length === 0) {
-        setNoProductsFound(true);
-      } else {
-        setNoProductsFound(false);
-        setProducts(response.data.products);
-      }
+      setProducts(response.data.products);
     } catch (error) {
       setError('Error searching for products');
     } finally {
       setLoading(false);
     }
   };
-
   const handleUpdate = async (event) => {
     event.preventDefault();
     try {
@@ -160,7 +153,7 @@ const ProductList = () => {
         <p className="font-bold">{message.includes('Error') ? 'Error' : 'Success'}</p>
         <p>{message}</p>
       </div>}
-      <div className="flex justify-center mb-4">
+  <div className="flex justify-center mb-4">
         <input
           type="text"
           value={searchTerm}
@@ -284,29 +277,8 @@ const ProductList = () => {
           </form>
         </div>
       </Modal>
-
-    <Modal
-        isOpen={noProductsFound}
-        onRequestClose={() => setNoProductsFound(false)}
-        contentLabel="No Products Found"
-        className="fixed inset-0 flex items-center justify-center z-50"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
-      >
-        <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-auto">
-          <h2 className="text-2xl mb-4">No Products Found</h2>
-          <p className="text-gray-700 mb-4">We couldn't find any products matching your search.</p>
-          <button
-            onClick={() => setNoProductsFound(false)}
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Close
-          </button>
-        </div>
-      </Modal>
     </div>
   );
 };
 
 export default ProductList;
-
- 
