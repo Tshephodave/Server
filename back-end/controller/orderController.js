@@ -53,7 +53,7 @@ async function placeOrder(req, res) {
 
     const mailOptions = {
       from: 'onlinestore@srty.com',
-      to: 'tshepodavid365@gmail.com', 
+      to: 'quotes@clever-kidz.co.za', 
       subject: 'New Order Placed',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
