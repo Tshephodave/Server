@@ -58,7 +58,7 @@ async function placeOrder(req, res) {
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
         <div style="text-align: center;">
-            <img src="https://vivlia.co.za/wp-content/uploads/2023/07/Vivlia-Logo.png" alt="Logo" style="max-width: 100px; margin-bottom: 20px;" />
+            <img src="https://cleverkidz.co.za/images/logo-444.png" alt="Logo" style="max-width: 100px; margin-bottom: 20px;" />
           </div>
           <h2>New Order Placed</h2>
           <p><strong>Username:</strong> ${user.username}</p>
