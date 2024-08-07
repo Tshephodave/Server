@@ -285,27 +285,28 @@ const ProductList = () => {
         </div>
       </Modal>
 
-     <Modal
-  isOpen={noProductsFound}
-  onRequestClose={() => setNoProductsFound(false)}
-  contentLabel="No Products Found"
-  className="fixed inset-0 flex items-center justify-center z-50 mt-[20px]"
-  overlayClassName="fixed inset-0 bg-black bg-opacity-50"
->
-  <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-auto">
-    <h2 className="text-2xl mb-4">No Products Found</h2>
-    <p className="mb-4">Sorry, we couldn't find any products matching your search term.</p>
-    <button
-      onClick={() => setNoProductsFound(false)}
-      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-    >
-      Close
-    </button>
-  </div>
-</Modal>
-
+    <Modal
+        isOpen={noProductsFound}
+        onRequestClose={() => setNoProductsFound(false)}
+        contentLabel="No Products Found"
+        className="fixed inset-0 flex items-center justify-center z-50"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+      >
+        <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-auto">
+          <h2 className="text-2xl mb-4">No Products Found</h2>
+          <p className="text-gray-700 mb-4">We couldn't find any products matching your search.</p>
+          <button
+            onClick={() => setNoProductsFound(false)}
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Close
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };
 
 export default ProductList;
+
+ 
