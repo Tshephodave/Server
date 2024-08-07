@@ -23,8 +23,8 @@ async function register(req, res) {
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: 'www.tshepodavid@gmail.com',
-        pass: 'kjvl nttf knhr zrqy',
+       user: 'cleverkidzcc@gmail.com',
+        pass: 'hxva pprd rxyi juyx',
       },
     });
 
