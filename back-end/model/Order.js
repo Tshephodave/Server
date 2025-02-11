@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
@@ -7,20 +6,12 @@ const orderSchema = new mongoose.Schema({
     {
       product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
       quantity: { type: Number, required: true },
-      itemCode: {
-        type: String,
-        required: true,
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-      picture: {
-        type: String,
-        required: true,
-      },
+      itemCode: { type: String, required: true },
+      name: { type: String, required: true },
+      picture: { type: String, required: true },
     }
   ],
+  totalItems: { type: Number, required: true },
   status: { type: String, default: 'Pending' }, 
   createdAt: { type: Date, default: Date.now },
 });
