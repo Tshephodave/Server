@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Loading from '../components/Loading'; 
@@ -28,7 +27,7 @@ const OrderConfirmation = () => {
     fetchOrders();
   }, []);
 
-  if (loading) return <Loading/>;
+  if (loading) return <Loading />;
   if (error) return <div className="text-center text-red-500">{error}</div>;
 
   return (
@@ -40,7 +39,9 @@ const OrderConfirmation = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {orders.map(order => (
             <div key={order._id} className="bg-white p-4 rounded-lg shadow-md">
-              <p className="text-gray-600"><strong>Total Price:</strong> R{order.totalPrice.toFixed(2)}</p>
+              <h3 className="text-lg font-bold">Order ID: {order._id}</h3>
+              <p className="text-gray-600"><strong>Status:</strong> {order.status}</p>
+              <p className="text-gray-600"><strong>Total Items:</strong> {order.totalItems}</p>
               <h3 className="text-lg font-bold mt-4">Products:</h3>
               <ul>
                 {order.products.map(product => (
@@ -48,9 +49,8 @@ const OrderConfirmation = () => {
                     <img src={product.picture} alt={product.name} className="w-16 h-16 object-fit rounded-md mr-4" />
                     <div>
                       <p className="text-gray-600"><strong>Item Code:</strong> {product.itemCode}</p>
-                     <p className="text-gray-600"><strong>Name:</strong> {product.name}</p>
+                      <p className="text-gray-600"><strong>Name:</strong> {product.name}</p>
                       <p className="text-gray-600"><strong>Quantity:</strong> {product.quantity}</p>
-                      <p className="text-gray-600"><strong>Price:</strong> R{product.price.toFixed(2)}</p>
                     </div>
                   </li>
                 ))}
