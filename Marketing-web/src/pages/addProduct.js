@@ -5,7 +5,6 @@ function AddProduct() {
   const [formData, setFormData] = useState({
     itemCode: '',
     name: '',
-    price: '',
     picture: '',
   });
 
@@ -29,7 +28,6 @@ function AddProduct() {
       setFormData({
         itemCode: '',
         name: '',
-        price: '',
         picture: '',
       });
     } catch(error){
@@ -68,18 +66,7 @@ function AddProduct() {
             required
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="price" className="block text-gray-700">Price</label>
-          <input
-            type="number"
-            id="price"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            className="border p-2 rounded w-full"
-            required
-          />
-        </div>
+   
         <div className="mb-4">
           <label htmlFor="picture" className="block text-gray-700">Image URL</label>
           <input
