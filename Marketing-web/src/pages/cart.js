@@ -4,14 +4,18 @@ import { CartContext } from '../context/cartContext';
 import axios from 'axios';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { BsFillCartPlusFill } from "react-icons/bs";
+
 const Cart = () => {
   const { cart, addToCart, removeFromCart, clearCart } = useContext(CartContext);
   const navigate = useNavigate();
+
+  // Corrected function to sum the total quantity of items
   const NumberofItems = () => {
-    return cart.reduce((total,item) => {
-      return total  * item.quantity;
-    },0);
-  }
+    return cart.reduce((total, item) => {
+      return total + item.quantity; // Summing up quantities instead of multiplying
+    }, 0);
+  };
+
   const handleCheckout = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -21,13 +25,17 @@ const Cart = () => {
     }
 
     try {
-      const response = await axios.post('https://server-h3fu.onrender.com/order/placeOrder', {
-        products: cart.map(item => ({ productId: item.product._id, quantity: item.quantity })),
-      }, {
-        headers: {
-          'Authorization': `Bearer ${token}`
+      const response = await axios.post(
+        'https://server-h3fu.onrender.com/order/placeOrder',
+        {
+          products: cart.map(item => ({ productId: item.product._id, quantity: item.quantity })),
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
         }
-      });
+      );
 
       if (response.status === 201) {
         alert('Order placed successfully!');
@@ -46,25 +54,24 @@ const Cart = () => {
       <div className="divide-y divide-gray-200">
         {cart.map(item => (
           <div key={item.product._id} className="py-4 flex items-center space-x-4 bg-white shadow-md rounded-lg p-4 mb-4">
-            <img src={item.product.picture} alt={item.product.name} className="w-20 h-20 object-fit rounded-md" />
+            <img src={item.product.picture} alt={item.product.name} className="w-20 h-20 object-cover rounded-md" />
             <div className="flex-1">
               <div className="text-xl text-green-600 font-semibold">{item.product.name}</div>
-              <div className="text-green-600">Quantity: {item.quantity} | Number of items: R{item.product * item.quantity}</div>
+              <div className="text-green-600">Quantity: {item.quantity}</div> {/* Fixed incorrect calculation */}
             </div>
             <div className="flex items-center space-x-4">
               <button onClick={() => removeFromCart(item.product._id)} className="text-gray-500 hover:text-red-500 focus:outline-none">
-                <RiDeleteBin6Line/>
+                <RiDeleteBin6Line />
               </button>
               <button onClick={() => addToCart(item.product)} className="text-gray-500 hover:text-blue-500 focus:outline-none">
-                <BsFillCartPlusFill/>
+                <BsFillCartPlusFill />
               </button>
             </div>
           </div>
-          
         ))}
       </div>
-      <div className='text-4xl font-bold mb-6  text-green-600'>
-      <strong>Number of Items:</strong> {NumberofItems()}
+      <div className="text-4xl font-bold mb-6 text-green-600">
+        <strong>Number of Items:</strong> {NumberofItems()}
       </div>
       <div className="mt-6 flex justify-between">
         <button onClick={handleCheckout} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none">
