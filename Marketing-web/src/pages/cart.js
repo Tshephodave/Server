@@ -7,7 +7,7 @@ import { BsFillCartPlusFill } from "react-icons/bs";
 const Cart = () => {
   const { cart, addToCart, removeFromCart, clearCart } = useContext(CartContext);
   const navigate = useNavigate();
-  const calculateTotal = () => {
+  const NumberofItems = () => {
     return cart.reduce((total,item) => {
       return total  * item.quantity;
     },0);
@@ -64,7 +64,7 @@ const Cart = () => {
         ))}
       </div>
       <div className='text-4xl font-bold mb-6  text-green-600'>
-      <strong>Number of Items:</strong> {Number of Items()}
+      <strong>Number of Items:</strong> {NumberofItems()}
       </div>
       <div className="mt-6 flex justify-between">
         <button onClick={handleCheckout} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none">
