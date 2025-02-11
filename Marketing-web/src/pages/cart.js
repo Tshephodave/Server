@@ -9,7 +9,7 @@ const Cart = () => {
   const navigate = useNavigate();
   const calculateTotal = () => {
     return cart.reduce((total,item) => {
-      return total + item.product.price * item.quantity;
+      return total  * item.quantity;
     },0);
   }
   const handleCheckout = async () => {
@@ -49,7 +49,7 @@ const Cart = () => {
             <img src={item.product.picture} alt={item.product.name} className="w-20 h-20 object-fit rounded-md" />
             <div className="flex-1">
               <div className="text-xl text-green-600 font-semibold">{item.product.name}</div>
-              <div className="text-green-600">Quantity: {item.quantity} | Price: R{item.product.price * item.quantity}</div>
+              <div className="text-green-600">Quantity: {item.quantity} | Number of items: R{item.product * item.quantity}</div>
             </div>
             <div className="flex items-center space-x-4">
               <button onClick={() => removeFromCart(item.product._id)} className="text-gray-500 hover:text-red-500 focus:outline-none">
@@ -64,7 +64,7 @@ const Cart = () => {
         ))}
       </div>
       <div className='text-4xl font-bold mb-6  text-green-600'>
-      <strong>Total Amount:</strong> R{calculateTotal()}
+      <strong>Number of Items:</strong> {Number of Items()}
       </div>
       <div className="mt-6 flex justify-between">
         <button onClick={handleCheckout} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none">
