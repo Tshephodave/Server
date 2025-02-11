@@ -21,28 +21,23 @@ async function placeOrder(req, res) {
 
     const { products } = req.body;
 
-    let totalPrice = 0;
     const orderProducts = await Promise.all(products.map(async ({ productId, quantity }) => {
       const product = await Product.findById(productId);
       if (!product) {
         throw new Error(`Product with id ${productId} not found`);
       }
-      const price = product.price * quantity;
-      totalPrice += price;
-      return { product: productId, name: product.name, quantity, price, itemCode:product.itemCode,picture:product.picture};
+      return { product: productId, name: product.name, quantity, itemCode: product.itemCode, picture: product.picture };
     }));
 
     const newOrder = new Order({
       user: user._id,
       products: orderProducts,
-      totalPrice,
       status: 'Pending', 
       createdAt: Date.now()
     });
 
     await newOrder.save();
 
-  
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
@@ -57,7 +52,7 @@ async function placeOrder(req, res) {
       subject: 'New Order Placed',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
-        <div style="text-align: center;">
+          <div style="text-align: center;">
             <img src="https://cleverkidz.co.za/images/logo-444.png" alt="Logo" style="max-width: 100px; margin-bottom: 20px;" />
           </div>
           <h2>New Order Placed</h2>
@@ -72,7 +67,6 @@ async function placeOrder(req, res) {
                 <th style="border: 1px solid #ddd; padding: 8px;">Item Code</th>
                 <th style="border: 1px solid #ddd; padding: 8px;">Product Name</th>
                 <th style="border: 1px solid #ddd; padding: 8px;">Quantity</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">Price</th>
               </tr>
             </thead>
             <tbody>
@@ -81,12 +75,10 @@ async function placeOrder(req, res) {
                   <td style="border: 1px solid #ddd; padding: 8px;">${op.itemCode}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">${op.name}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">${op.quantity}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">${op.price}</td>
                 </tr>
               `).join('')}
             </tbody>
           </table>
-          <p><strong>Total Price:</strong> ${totalPrice}</p>
         </div>
       `,
     };
