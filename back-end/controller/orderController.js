@@ -21,23 +21,36 @@ async function placeOrder(req, res) {
 
     const { products } = req.body;
 
+    let totalItems = 0;
+
     const orderProducts = await Promise.all(products.map(async ({ productId, quantity }) => {
       const product = await Product.findById(productId);
       if (!product) {
         throw new Error(`Product with id ${productId} not found`);
       }
-      return { product: productId, name: product.name, quantity, itemCode: product.itemCode, picture: product.picture };
+
+      totalItems += quantity;
+
+      return { 
+        product: productId, 
+        name: product.name, 
+        quantity, 
+        itemCode: product.itemCode, 
+        picture: product.picture 
+      };
     }));
 
     const newOrder = new Order({
       user: user._id,
       products: orderProducts,
+      totalItems, // Adding totalItems count
       status: 'Pending', 
       createdAt: Date.now()
     });
 
     await newOrder.save();
 
+   
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
