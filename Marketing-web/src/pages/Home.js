@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <div className="container mx-auto p-4">
       <header className="text-center mb-10">
-        <h1 className="text-4xl font-extrabold text-green-800 mb-4">Welcome to Vivlia online Store</h1>
+        <h1 className="text-4xl font-extrabold text-green-800 mb-4">Welcome to ECD</h1>
         <p className="text-lg text-gray-700">A leading publishing house specialising in educational, children’s and general publications.</p>
       </header>
 
