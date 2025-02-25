@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { CartContext } from '../context/cartContext';
 
 const Navbar = ({ user, setUser, loading }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpaque, setIsOpaque] = useState(true);
+  const { cart } = useContext(CartContext); // Get cart from context
+
   const navigate = useNavigate();
 
   const logout = async () => {
@@ -24,25 +27,23 @@ const Navbar = ({ user, setUser, loading }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsOpaque(false);
-      } else {
-        setIsOpaque(true);
-      }
+      setIsOpaque(window.scrollY <= 50);
     };
 
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
+  // Calculate the total number of items in the cart
+  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <nav className={`bg-gradient-to-r from-green-800 to-green-600 text-white text-center py-4 shadow-md sticky top-0 z-50 transition-opacity duration-500 ${isOpaque ? 'opacity-100' : 'opacity-70'}`}>
       <div className="container mx-auto flex justify-between items-center px-4 md:px-8">
         <Link to="/" className="flex items-center text-white text-2xl font-bold hover:text-gray-200">
-          ECD
+          Vivlia Online Store
         </Link>
         <button
           onClick={toggleMenu}
@@ -71,8 +72,13 @@ const Navbar = ({ user, setUser, loading }) => {
               <Link to="/stock" className="text-white text-lg hover:text-gray-200 transition duration-200 ease-in-out px-3 py-2">
                 Items
               </Link>
-              <Link to="/cart" className="text-white text-lg hover:text-gray-200 transition duration-200 ease-in-out px-3 py-2">
+              <Link to="/cart" className="text-white text-lg hover:text-gray-200 transition duration-200 ease-in-out px-3 py-2 relative">
                 MyCart
+                {cartItemCount > 0 && (
+                  <span className="ml-1 bg-red-500 text-white text-sm font-bold px-2 py-1 rounded-full">
+                    {cartItemCount}
+                  </span>
+                )}
               </Link>
               <Link to="/oderdetails" className="text-white text-lg hover:text-gray-200 transition duration-200 ease-in-out px-3 py-2">
                 My Order Details
