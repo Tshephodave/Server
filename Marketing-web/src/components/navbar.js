@@ -43,7 +43,7 @@ const Navbar = ({ user, setUser, loading }) => {
     <nav className={`bg-gradient-to-r from-green-800 to-green-600 text-white text-center py-4 shadow-md sticky top-0 z-50 transition-opacity duration-500 ${isOpaque ? 'opacity-100' : 'opacity-70'}`}>
       <div className="container mx-auto flex justify-between items-center px-4 md:px-8">
         <Link to="/" className="flex items-center text-white text-2xl font-bold hover:text-gray-200">
-          Vivlia Online Store
+          ECD
         </Link>
         <button
           onClick={toggleMenu}
