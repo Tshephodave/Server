@@ -554,7 +554,7 @@ const ProductList = ({ setUser }) => {
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[80vh] overflow-y-auto mt-8">
             <div className="p-3 border-b border-gray-200 bg-gradient-to-r from-green-600 to-green-800">
               <div className="flex items-center justify-between">
-                <h2 className="text-base font-bold text-white">Login to Continue</h2>
+                <h2 className="text-base font-bold text-white">Sign in to Continue</h2>
                 <button
                   onClick={closeLoginModal}
                   className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
