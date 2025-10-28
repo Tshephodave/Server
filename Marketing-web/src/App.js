@@ -56,14 +56,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login setUser={setUser} />} />
-              <Route
-                path="/stock"
-                element={
-                  <ProtectedRoute user={user}>
-                    <Stock />
-                  </ProtectedRoute>
-                }
-              />
+             <Route path="/stock" element={<Stock setUser={setUser} />} />
               <Route
                 path="/cart"
                 element={
